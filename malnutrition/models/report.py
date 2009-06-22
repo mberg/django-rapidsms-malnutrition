@@ -69,6 +69,8 @@ class Observation(models.Model):
 
     def __unicode__(self):
         return self.name
+        
+        
                 
 class ReportMalnutrition(Report):
     MODERATE_STATUS = 1
@@ -87,7 +89,7 @@ class ReportMalnutrition(Report):
     weight = models.FloatField(_("Weight (kg)"), null=True, blank=True)
     stunted = models.BooleanField()
     weight_for_height = models.CharField(max_length="10")
-    observed = models.ManyToManyField("Observation")
+    observed = models.ManyToManyField("Observation", blank=True)
     status = models.IntegerField(choices=STATUS_CHOICES, db_index=True, blank=True, null=True)
     
     class Meta:
@@ -142,3 +144,28 @@ class ReportMalnutrition(Report):
                     self.status = self.SEVERE_STATUS
         
         super(ReportMalnutrition, self).save(*args)
+        
+class ReportMalaria(Report):
+    
+    bednet = models.BooleanField(db_index=True)
+    result = models.BooleanField(db_index=True) 
+    observed = models.ManyToManyField("Observation", blank=True)
+
+    class Meta:
+        get_latest_by = 'entered_at'
+        ordering = ("-entered_at",)
+        abstract = True
+
+    def get_dictionary(self):
+        return {
+            'result': self.result,
+            'result_text': self.result and "Y" or "N",
+            'bednet': self.bednet,
+            'bednet_text': self.bednet and "Y" or "N",
+            'observed': ", ".join([k.name for k in self.observed.all()]),            
+        }
+
+    def save(self, *args):
+        if not self.id:
+            self.entered_at = datetime.now()
+        super(ReportMalaria, self).save(*args)

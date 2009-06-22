@@ -41,6 +41,11 @@ class BooleanField(Field):
     
 class DateField(Field):
     def __init__(self, format="%d/%m/%Y", required=False):
+    #def __init__(self, format=text, required=False):
+        #if len(self) == 8:
+            #self.format="%d%m%Y"            
+        #else:
+            #self.format="%d%m%y"
         self.format = format
         Field.__init__(self, required=required)
     
