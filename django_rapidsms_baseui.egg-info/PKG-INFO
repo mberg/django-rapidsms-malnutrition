@@ -1,0 +1,20 @@
+Metadata-Version: 1.0
+Name: django-rapidsms-baseui
+Version: 0.1.0
+Summary: Base models for rapidsms that can be re-used, not a django app.
+Home-page: UNKNOWN
+Author: Andy McKay
+Author-email: andy@clearwind.ca
+License: BSD
+Description: This is a series of re-usable modules for the Kenyan and Malawi Malnutrition projects.
+        
+        For more detailed docs look in the docs folder.
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
+Classifier: Environment :: Web Environment
+Classifier: Framework :: Django
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: BSD License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
